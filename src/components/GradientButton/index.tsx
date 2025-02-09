@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
+        fontFamily: 'PingFang SC',
         color: 'white',
         fontWeight: '600',
     },

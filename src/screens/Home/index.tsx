@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     },
     noteStyle: {
         fontSize: 16,
+        fontFamily: 'PingFang SC',
         color: '#FFFFFF',
         paddingStart: 5,
     },

@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   summaryTextStyle: {
+    fontFamily: 'PingFang SC',
     fontSize: 30,
     color: '#FFFFFF',
     paddingStart: 20,

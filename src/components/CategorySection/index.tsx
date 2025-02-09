@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         paddingStart: 5,
         fontSize: 18,
+        fontFamily: 'PingFang SC',
     },
     contentContainer: {
         marginBottom: 10,
@@ -65,7 +66,8 @@ const styles = StyleSheet.create({
     },
     contentTextStyle: {
         color: '#FFFFFF',
+        fontFamily: 'PingFang SC',
         fontSize: 16,
-        width: '90%'
+        width: '90%',
     },
 })

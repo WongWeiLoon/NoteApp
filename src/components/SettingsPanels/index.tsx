@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     textStyle: {
         color: '#FFFFFF',
         fontSize: 18,
+        fontFamily: 'PingFang SC',
         paddingLeft: 20,
         opacity: 0.9,
     },

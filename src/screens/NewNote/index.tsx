@@ -93,6 +93,7 @@ const styles = StyleSheet.create({
     },
     dropdownButtonText: {
         color: '#FFFFFF',
+        fontFamily: 'PingFang SC',
         fontSize: 18,
     },
     dropdownList: {
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
     },
     dropdownItemText: {
         color: '#FFFFFF',
+        fontFamily: 'PingFang SC',
         fontSize: 18,
     },
     textareaContainer: {
@@ -123,6 +125,7 @@ const styles = StyleSheet.create({
         borderRadius: 18,
         padding: 20,
         color: '#FFFFFF',
+        fontFamily: 'PingFang SC',
         fontSize: 18,
         height: 260,
         textAlignVertical: 'top',
@@ -134,6 +137,7 @@ const styles = StyleSheet.create({
         bottom: 10,
         right: 10,
         color: '#6B7280',
+        fontFamily: 'PingFang SC',
         fontSize: 16,
     },
 })

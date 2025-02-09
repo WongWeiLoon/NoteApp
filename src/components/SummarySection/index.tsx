@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     titleStyle: {
+        fontFamily: 'PingFang SC',
         fontSize: 18,
         color: '#FFFFFF',
         paddingStart: 5,
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
     },
     recordTextStyle: {
         color: '#FFFFFF',
+        fontFamily: 'PingFang SC',
         fontSize: 16,
         opacity: 0.7,
     },
