@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'; 
 
 type Props = {
-    children: React.ReactNode;
+    children: JSX.Element;
     style?: ViewStyle;
 }
 

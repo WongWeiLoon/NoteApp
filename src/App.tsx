@@ -50,7 +50,13 @@ const App = () => {
           // }}
         />
         <Tab.Screen name=" " component={NewNoteScreen} />
-        <Tab.Screen name="Summary" component={SummaryScreen} />
+        <Tab.Screen 
+          name="Summary"
+          component={SummaryScreen}
+          options={{
+            headerShown: false, // Hides the top bar
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

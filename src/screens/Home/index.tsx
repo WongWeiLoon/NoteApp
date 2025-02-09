@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
 
 import GradientBackground from '../../components/GradientBg';
 
@@ -9,6 +9,7 @@ import LifeSvg from "../../assets/Life.svg";
 import HealthWellnessSvg from "../../assets/HealthWellness.svg";
 
 import CategorySection from '../../components/CategorySection';
+import { Category } from '../../shared/utils/constants';
 
 const Home = () => {
   return (
@@ -21,17 +22,17 @@ const Home = () => {
 
             <CategorySection
                 icon={<WorkStudySvg height={20} width={20} />}
-                title="Work and study"
+                title={Category.WORK_AND_STUDY}
             />
 
             <CategorySection
                 icon={<LifeSvg height={20} width={20} />}
-                title="Life"
+                title={Category.LIFE}
             />
 
             <CategorySection
                 icon={<HealthWellnessSvg height={20} width={20} />}
-                title="Health and wellness"
+                title={Category.HEALTH_WELLNESS}
             />
         </ScrollView>
     </GradientBackground>
