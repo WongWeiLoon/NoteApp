@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native'
 
 import GradientBackground from '../../components/GradientBg';
 import DropdownSvg from "../../assets/images/Dropdown.svg";
+import BottomBar from '../../components/BottomBar';
 
 const categoriesOptions = [
     'Work and Study',
@@ -17,54 +18,61 @@ const NewNote = () => {
 
   return (
     <GradientBackground>
-        <View style={styles.mainContainer}>
-            {/* Dropdown list */}
-            <View style={styles.dropdownContainer}>
-                <TouchableOpacity
-                    style={styles.dropdownButton}
-                    onPress={() => setIsOpen(!isOpen)}
-                >
-                    <Text style={styles.dropdownButtonText}>
-                        {selectedCategory || 'Choose a category'}
-                    </Text>
-
-                    <DropdownSvg width={24} height={24} />
-                </TouchableOpacity>
-
-                {isOpen && (
-                <View style={styles.dropdownList}>
-                    {categoriesOptions.map((category: string, index: number) => (
+        <>
+            <View style={styles.mainContainer}>
+                {/* Dropdown list */}
+                <View style={styles.dropdownContainer}>
                     <TouchableOpacity
-                        key={index}
-                        style={styles.dropdownItem}
-                        onPress={() => {
-                        setSelectedCategory(category)
-                        setIsOpen(false)
-                        }}
+                        style={styles.dropdownButton}
+                        onPress={() => setIsOpen(!isOpen)}
                     >
-                        <Text style={styles.dropdownItemText}>{category}</Text>
+                        <Text style={styles.dropdownButtonText}>
+                            {selectedCategory || 'Choose a category'}
+                        </Text>
+
+                        <DropdownSvg width={24} height={24} />
                     </TouchableOpacity>
-                    ))}
+
+                    {isOpen && (
+                    <View style={styles.dropdownList}>
+                        {categoriesOptions.map((category: string, index: number) => (
+                        <TouchableOpacity
+                            key={index}
+                            style={styles.dropdownItem}
+                            onPress={() => {
+                            setSelectedCategory(category)
+                            setIsOpen(false)
+                            }}
+                        >
+                            <Text style={styles.dropdownItemText}>{category}</Text>
+                        </TouchableOpacity>
+                        ))}
+                    </View>
+                    )}
                 </View>
-                )}
+
+                {/* Textarea */}
+                <View style={styles.textareaContainer}>
+                    <TextInput
+                    style={styles.textarea}
+                    placeholder="Please input note content"
+                    placeholderTextColor="#6B7280"
+                    multiline
+                    maxLength={200}
+                    value={noteContent}
+                    onChangeText={setNoteContent}
+                    />
+                    <Text style={styles.characterCount}>
+                        {noteContent.length}/200
+                    </Text>
+                </View>
             </View>
 
-            {/* Textarea */}
-            <View style={styles.textareaContainer}>
-                <TextInput
-                style={styles.textarea}
-                placeholder="Please input note content"
-                placeholderTextColor="#6B7280"
-                multiline
-                maxLength={200}
-                value={noteContent}
-                onChangeText={setNoteContent}
-                />
-                <Text style={styles.characterCount}>
-                    {noteContent.length}/200
-                </Text>
-            </View>
-        </View>
+            <BottomBar 
+                label="Save"
+                onPress={() => Alert.alert('Save')}
+            />
+        </>
     </GradientBackground>
   )
 }
@@ -74,9 +82,10 @@ export default NewNote;
 const styles = StyleSheet.create({
     mainContainer: {
         margin: 20,
+        flex: 1,
     },
     dropdownContainer: {
-        position: 'relative',
+        // position: 'relative',
         paddingTop: 40,
         marginBottom: 15,
     },
@@ -140,4 +149,10 @@ const styles = StyleSheet.create({
         fontFamily: 'PingFang SC',
         fontSize: 16,
     },
+    bottomContainer: {
+        // position: 'absolute',
+        // bottom: 120,
+        // left: 0,
+        // right: 0,
+    }
 })
