@@ -6,9 +6,9 @@ import SummarySection from '../../components/SummarySection';
 
 import { Category, SummaryCategory } from '../../shared/utils/constants';
 
-import Avatar1 from '../../assets/Avatar1.svg';
-import Avatar2 from '../../assets/Avatar2.svg';
-import Avatar3 from '../../assets/Avatar3.svg';
+import Avatar1 from '../../assets/images/Avatar1.svg';
+import Avatar2 from '../../assets/images/Avatar2.svg';
+import Avatar3 from '../../assets/images/Avatar3.svg';
 
 const Summary = () => {
   return (
@@ -19,7 +19,7 @@ const Summary = () => {
           <Text style={styles.summaryTextStyle}>Summary</Text>
 
           <Image 
-            source={require('../../assets/Robot.png')}
+            source={require('../../assets/images/Robot.png')}
             style={styles.image}
           />
         </View>

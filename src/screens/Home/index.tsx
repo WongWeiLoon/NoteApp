@@ -3,10 +3,10 @@ import React from 'react';
 
 import GradientBackground from '../../components/GradientBg';
 
-import ClocksSvg from "../../assets/Clocks.svg"
-import WorkStudySvg from "../../assets/WorkStudy.svg";
-import LifeSvg from "../../assets/Life.svg";
-import HealthWellnessSvg from "../../assets/HealthWellness.svg";
+import ClocksSvg from "../../assets/images/Clocks.svg"
+import WorkStudySvg from "../../assets/images/WorkStudy.svg";
+import LifeSvg from "../../assets/images/Life.svg";
+import HealthWellnessSvg from "../../assets/images/HealthWellness.svg";
 
 import CategorySection from '../../components/CategorySection';
 import { Category } from '../../shared/utils/constants';

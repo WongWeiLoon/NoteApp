@@ -4,16 +4,15 @@ import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeScreen from "./screens/Home"
-import SummaryScreen from "./screens/Summary"
-import NewNoteScreen from "./screens/NewNote"
+import HomeScreen from './screens/Home';
+import SummaryScreen from './screens/Summary';
+import NewNoteScreen from './screens/NewNote';
+import SettingScreen from './screens/Settings';
 
 // Import SVG icons
-import HomeSvg from "./assets/Home.svg";
-import SummarySvg from './assets/Summary.svg';
-import AddSvg from "./assets/Add.svg";
-
-// import HomePng from "./assets/Home.png";
+import HomeSvg from './assets/images/Home.svg';
+import SummarySvg from './assets/images/Summary.svg';
+import AddSvg from './assets/images/Add.svg';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,7 +49,7 @@ const App = () => {
           // }}
         />
         <Tab.Screen name=" " component={NewNoteScreen} />
-        <Tab.Screen 
+        <Tab.Screen
           name="Summary"
           component={SummaryScreen}
           options={{
@@ -60,7 +59,7 @@ const App = () => {
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 const styles = StyleSheet.create({
   sectionContainer: {

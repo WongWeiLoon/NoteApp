@@ -7,7 +7,7 @@ type Props = {
     content?: string;
 }
 
-import ArrowRight from "../../assets/ArrowRight.svg"
+import ArrowRight from "../../assets/images/ArrowRight.svg"
 
 const CategorySection = ({ icon, title, content }: Props) => {
   return (

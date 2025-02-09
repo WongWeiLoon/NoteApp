@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
 
 import GradientBackground from '../../components/GradientBg';
-import DropdownSvg from "../../assets/Dropdown.svg";
+import DropdownSvg from "../../assets/images/Dropdown.svg";
 
 const categoriesOptions = [
     'Work and Study',
