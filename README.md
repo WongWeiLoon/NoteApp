@@ -1,5 +1,20 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+## Dependencies
+
+This project uses the following key libraries:
+
+- Node: v22.11.0
+- React: v18.3.1
+- NPM: 10.9.0
+- React-Native: 0.77.0
+- Operating System: macOs Sonoma 14.6
+- Android SDK Versions:
+  - compileSdkVersion: 35
+  - minSdkVersion: 24
+  - targetSdkVersion: 34
+- iOS SDK Version: 18.2
+
 # Getting Started
 
 > **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
