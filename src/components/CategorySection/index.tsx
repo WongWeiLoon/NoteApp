@@ -2,14 +2,20 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 type Props = {
+    categoryKey: string;
     icon: JSX.Element;
     title: string;
-    content?: string;
+    notes: { id: number; category: string; content: string; createdAt: string }[];
 }
 
 import ArrowRight from "../../assets/images/ArrowRight.svg"
 
-const CategorySection = ({ icon, title, content }: Props) => {
+const CategorySection = ({ categoryKey, icon, title, notes }: Props) => {
+  // Sort notes by createdAt in descending order and take the first 3
+  const sortedNotes = notes
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 3);
+
   return (
     <View style={styles.mainContainer}>
       {/* Title Section */}
@@ -19,20 +25,15 @@ const CategorySection = ({ icon, title, content }: Props) => {
       </View>
 
       {/* Content */}
-      <View style={styles.contentContainer}>
-        <Text style={styles.contentTextStyle}>Overview of basic computer networking knowledge</Text>
-        <ArrowRight height={18} width={18} />
-      </View>
-
-      <View style={styles.contentContainer}>
-        <Text style={styles.contentTextStyle}>How to calculate float multiplicationand division in JavaScript?</Text>
-        <ArrowRight height={18} width={18} />
-      </View>
-
-      <View style={styles.contentContainer}>
-        <Text style={styles.contentTextStyle}>Maintain sufficient daily water intake</Text>
-        <ArrowRight height={18} width={18} />
-      </View>
+      {sortedNotes.map(note => (
+        <View key={note.id} style={styles.contentContainer}>
+          <Text style={styles.contentTextStyle}>
+            {/* first 20 chars only */}
+            {note.content.slice(0, 20)}{note.content.length > 20 ? '...' : ''}
+          </Text>
+          <ArrowRight height={18} width={18} />
+        </View>
+      ))}
     </View>
   )
 }

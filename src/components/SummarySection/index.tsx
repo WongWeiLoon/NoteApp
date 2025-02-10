@@ -15,7 +15,6 @@ const SummarySection = ({ icon, title, recordsNumber }: Props) => {
         <View style={styles.mainContainer}>
             <View style={styles.titleSection}>
                 {icon}
-                {/* <Avatar1 height={50} width={50} /> */}
                 <Text style={styles.titleStyle}> {title} </Text>
             </View>
 

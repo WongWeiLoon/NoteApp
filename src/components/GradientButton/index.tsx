@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         borderRadius: 22,
         justifyContent: 'center',
         alignItems: 'center',
-        flex: 1,
+        // flex: 1,
     },
     touchable: {
         paddingHorizontal: 16,

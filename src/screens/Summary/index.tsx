@@ -1,5 +1,5 @@
-import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Alert, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import GradientBackground from '../../components/GradientBg';
 import SummarySection from '../../components/SummarySection';
@@ -10,7 +10,65 @@ import Avatar1 from '../../assets/images/Avatar1.svg';
 import Avatar2 from '../../assets/images/Avatar2.svg';
 import Avatar3 from '../../assets/images/Avatar3.svg';
 
+import { getNotes } from '../../shared/utils/asyncStorageUtils';
+
+type dataProps = {
+  id: number,
+  category: string,
+  content: string,
+  createdAt: any,
+}
+
+type recordsObjType = {
+  workStudyRecord: number;
+  lifeRecord: number;
+  healthRecord: number;
+}
+
+const countRecordsByCategory = (data: dataProps[]) => {
+  let workStudyRecord = 0;
+  let lifeRecord = 0;
+  let healthRecord = 0;
+
+  data.forEach(item => {
+    switch (item.category) {
+      case Category.WORK_AND_STUDY:
+        workStudyRecord += 1;
+        break;
+      case Category.LIFE:
+        lifeRecord += 1;
+        break;
+      case Category.HEALTH_WELLNESS:
+        healthRecord += 1;
+        break;
+      default:
+        break;
+    }
+  });
+
+  return {
+    workStudyRecord,
+    lifeRecord,
+    healthRecord,
+  };
+};
+
 const Summary = () => {
+  const [recordsObj, setRecordObj] = useState<recordsObjType>({
+    workStudyRecord: 0,
+    lifeRecord: 0,
+    healthRecord: 0,
+  });
+
+  useEffect(() => {
+      const getRecordsObj = async () => {
+        const allNotes = await getNotes();
+        const obj = countRecordsByCategory(allNotes);
+        setRecordObj(obj);
+      };
+      getRecordsObj();
+   }, []);
+
   return (
     <GradientBackground>
       <SafeAreaView>
@@ -28,19 +86,19 @@ const Summary = () => {
         <View style={styles.summaryContainer}>
           <SummarySection 
             title={Category.WORK_AND_STUDY}
-            recordsNumber={50}
+            recordsNumber={recordsObj.workStudyRecord}
             icon={<Avatar1 height={50} width={50} />}
           />
 
           <SummarySection 
             title={SummaryCategory.HOME_LIFE}
-            recordsNumber={12}
+            recordsNumber={recordsObj.lifeRecord}
             icon={<Avatar2 height={50} width={50} />}
           />
 
           <SummarySection 
             title={Category.HEALTH_WELLNESS}
-            recordsNumber={30}
+            recordsNumber={recordsObj.healthRecord}
             icon={<Avatar3 height={50} width={50} />}
           />
         </View>

@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native'
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
 
 import GradientBackground from '../../components/GradientBg';
-import DropdownSvg from "../../assets/images/Dropdown.svg";
+import DropdownSvg from '../../assets/images/Dropdown.svg';
 import BottomBar from '../../components/BottomBar';
+
+import { saveNewNote} from '../../shared/utils/asyncStorageUtils';
+import { Category } from '../../shared/utils/constants';
 
 const categoriesOptions = [
     'Work and Study',
@@ -15,6 +20,33 @@ const NewNote = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [noteContent, setNoteContent] = useState('');
+  const navigation = useNavigation();
+
+  const saveNote = async () => {
+    if (selectedCategory.trim().length === 0 || noteContent.trim().length === 0) {
+        Alert.alert('Please make sure Category and Note Content fields are filled.');
+        return;
+    }
+
+    let noteCategory = selectedCategory;
+    if (selectedCategory === 'Health and Well-being') {
+        noteCategory = Category.HEALTH_WELLNESS;
+    }
+
+    const newNote = {
+        id: Date.now(), // Unique ID based on timestamp
+        category: noteCategory,
+        content: noteContent,
+        createdAt: new Date().toISOString(),
+    };
+
+    await saveNewNote(newNote); // Save the new note
+
+    // clear contents and category
+    setSelectedCategory('');
+    setNoteContent('');
+    navigation.goBack();
+  };
 
   return (
     <GradientBackground>
@@ -40,8 +72,8 @@ const NewNote = () => {
                             key={index}
                             style={styles.dropdownItem}
                             onPress={() => {
-                            setSelectedCategory(category)
-                            setIsOpen(false)
+                            setSelectedCategory(category);
+                            setIsOpen(false);
                             }}
                         >
                             <Text style={styles.dropdownItemText}>{category}</Text>
@@ -54,13 +86,13 @@ const NewNote = () => {
                 {/* Textarea */}
                 <View style={styles.textareaContainer}>
                     <TextInput
-                    style={styles.textarea}
-                    placeholder="Please input note content"
-                    placeholderTextColor="#6B7280"
-                    multiline
-                    maxLength={200}
-                    value={noteContent}
-                    onChangeText={setNoteContent}
+                        style={styles.textarea}
+                        placeholder="Please input note content"
+                        placeholderTextColor="#6B7280"
+                        multiline
+                        maxLength={200}
+                        value={noteContent}
+                        onChangeText={setNoteContent}
                     />
                     <Text style={styles.characterCount}>
                         {noteContent.length}/200
@@ -68,14 +100,14 @@ const NewNote = () => {
                 </View>
             </View>
 
-            <BottomBar 
+            <BottomBar
                 label="Save"
-                onPress={() => Alert.alert('Save')}
+                onPress={saveNote}
             />
         </>
     </GradientBackground>
-  )
-}
+  );
+};
 
 export default NewNote;
 
@@ -154,5 +186,5 @@ const styles = StyleSheet.create({
         // bottom: 120,
         // left: 0,
         // right: 0,
-    }
-})
+    },
+});

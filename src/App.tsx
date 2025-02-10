@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, TouchableOpacity, } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,24 +11,81 @@ import SettingScreen from './screens/Settings';
 
 // Import SVG icons
 import BackSvg from './assets/images/ArrowLeft.svg';
+import SettingSvg from './assets/images/Settings.svg';
 import HomeTabSvg from './assets/tabSvg/HomeTab';
 import SummaryTabSvg from './assets/tabSvg/SummaryTab';
 import NewNoteTabSvg from './assets/tabSvg/NewNoteTab';
 
+import { BAR_HEIGHT } from './shared/utils/constants';
+import { createStackNavigator } from '@react-navigation/stack';
+
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator(); 
+
+const HomeStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="HomeScreen"  // Changed from "Home" to "HomeScreen"
+      component={HomeScreen}
+      options={({ navigation }) => ({
+        headerStyle: {
+          backgroundColor: '#1C0B37',
+          height: BAR_HEIGHT,
+        },
+        headerTitleStyle: styles.headerTitleStyling,
+        headerTitleAlign: 'left',
+        headerTitle: 'Home',  // Explicitly set the header title
+        headerRight: () => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Settings')}
+            style={styles.settingsButton}
+          >
+            <SettingSvg width={20} height={20} />
+          </TouchableOpacity>
+        ),
+      })}
+    />
+    <Stack.Screen
+      name="Settings"
+      component={SettingScreen}
+      options={({ navigation }) => ({
+        headerStyle: {
+          backgroundColor: '#1C0B37',
+          height: BAR_HEIGHT,
+        },
+        headerTitle: 'Settings',
+        headerTitleStyle: styles.headerTitleStyling,
+        headerTitleAlign: 'left',
+        headerLeft: () => (
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}
+          >
+            <BackSvg width={28} height={28} />
+          </TouchableOpacity>
+        ),
+      })}
+    />
+  </Stack.Navigator>
+);
 
 const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={({ route, navigation }) => ({
           tabBarStyle: {
             height: 100,
             borderTopRightRadius: 15,
             borderTopLeftRadius: 15,
             backgroundColor: '#1C0B37',
             paddingTop: 20, // Add some padding to help with vertical centering
-            // paddingBottom: 20, // Add some padding at bottom for better appearance
+            // Hide bottom tab bar when in Settings screen
+            display: navigation.getState().routes.some(
+              route => route.state?.routes?.some(r => r.name === 'Settings')
+            )
+              ? 'none'
+              : 'flex',
           },
           tabBarLabelStyle: {
             fontSize: 12,
@@ -42,16 +99,14 @@ const App = () => {
         {/* Home */}
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeStack}
           options={{
+            headerShown: false,  // Hide the Tab navigator's header
             tabBarIcon: ({ focused, color }) => (
               <HomeTabSvg 
                 color={focused ? '#F94695' : '#918DAC'} 
               />
             ),
-            headerStyle: {
-              height: 100,
-            },
           }}
         />
 
@@ -63,7 +118,7 @@ const App = () => {
             tabBarStyle: { display: 'none' },
             headerStyle: {
               backgroundColor: '#1C0B37',
-              height: 100,
+              height: BAR_HEIGHT,
             },
             headerTitleStyle: styles.headerTitleStyling,
             headerTitleAlign: 'left',
@@ -114,6 +169,9 @@ const styles = StyleSheet.create({
   backButton: {
     paddingLeft: 20,
     paddingRight: 15,
+  },
+  settingsButton: {
+    paddingHorizontal: 20,
   },
 });
 
