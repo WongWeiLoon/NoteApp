@@ -1,5 +1,5 @@
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react';
 
 import GradientBackground from '../../components/GradientBg';
 
@@ -46,7 +46,7 @@ const Home = () => {
         setEmptyNote(!allNotes || allNotes.length === 0);
       };
       fetchNotes();
-    }, []) // Empty dependency array ensures this runs on focus and not every render
+    }, [])
   );
 
   // Group the notes by category

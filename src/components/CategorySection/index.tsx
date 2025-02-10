@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
 type Props = {
     categoryKey: string;
@@ -8,7 +8,7 @@ type Props = {
     notes: { id: number; category: string; content: string; createdAt: string }[];
 }
 
-import ArrowRight from "../../assets/images/ArrowRight.svg"
+import ArrowRight from '../../assets/images/ArrowRight.svg';
 
 const CategorySection = ({ categoryKey, icon, title, notes }: Props) => {
   // Sort notes by createdAt in descending order and take the first 3
@@ -35,8 +35,8 @@ const CategorySection = ({ categoryKey, icon, title, notes }: Props) => {
         </View>
       ))}
     </View>
-  )
-}
+  );
+};
 
 export default CategorySection;
 
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         width: '90%',
     },
-})
+});

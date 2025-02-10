@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import GradientBackground from '../../components/GradientBg';
 import SummarySection from '../../components/SummarySection';
@@ -11,6 +11,7 @@ import Avatar2 from '../../assets/images/Avatar2.svg';
 import Avatar3 from '../../assets/images/Avatar3.svg';
 
 import { getNotes } from '../../shared/utils/asyncStorageUtils';
+import { useFocusEffect } from '@react-navigation/native';
 
 type dataProps = {
   id: number,
@@ -60,14 +61,16 @@ const Summary = () => {
     healthRecord: 0,
   });
 
-  useEffect(() => {
-      const getRecordsObj = async () => {
-        const allNotes = await getNotes();
-        const obj = countRecordsByCategory(allNotes);
-        setRecordObj(obj);
-      };
-      getRecordsObj();
-   }, []);
+  useFocusEffect(
+      React.useCallback(() => {
+        const getRecordsObj = async () => {
+          const allNotes = await getNotes();
+          const obj = countRecordsByCategory(allNotes);
+          setRecordObj(obj);
+        };
+        getRecordsObj();
+      }, [])
+  );
 
   return (
     <GradientBackground>
