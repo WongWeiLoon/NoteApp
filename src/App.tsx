@@ -78,6 +78,10 @@ const App = () => {
             height: 100,
             borderTopRightRadius: 15,
             borderTopLeftRadius: 15,
+            borderLeftWidth: 0.2,
+            borderRightWidth: 0.2,
+            position: 'absolute',
+            overflow: 'hidden',
             backgroundColor: '#1C0B37',
             paddingTop: 20, // Add some padding to help with vertical centering
             // Hide bottom tab bar when in Settings screen
